@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Access controll</title>
+    
+  </head>
+  <body>
+   
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  // on load of page
+  $(function(){
+    console.log("Hello")
+  });
+
+</script>
+
+  </body>
+</html>
