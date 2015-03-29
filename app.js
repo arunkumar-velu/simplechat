@@ -7,6 +7,50 @@ app.get('/home', function(req, res){
    res.sendFile(__dirname + '/view/index.html');
 });
 
+
+var Collection = ['users'];
+var db = require("mongojs").connect("chatdb",Collection);
+function user(name,address,email){
+    this.name = name;
+    this.address = address;
+    this.email = email;
+}
+app.get('/users', function(req, res, next){
+  res.setHeader('Access-Control-Allow-Origin','*');
+    console.log(req.query.name);
+    console.log("GET")
+    var user1 =new user(req.query.name,"","")
+    db.users.save(user1,function(err,saveddata){
+    if(err){
+        console.log("Error through on save ",err)
+    }
+    else{
+        console.log("successfully saved....")
+    }
+    });
+ 
+});
+
+app.get('/usersAll', function(req, res, next){
+  res.setHeader('Access-Control-Allow-Origin','*');
+    console.log(req.query.name);
+    console.log("GET")
+    db.users.find().limit(20).sort({postedOn : -1} , function(err , success){
+        console.log('Response success '+success);
+        console.log('Response error '+err);
+        if(success){
+            res.send(200 , success);
+            return next();
+        }else{
+            return next(err);
+        }
+ 
+    });
+ 
+});
+
+
+
 // usernames which are currently connected to the chat
 var usernames = {};
 

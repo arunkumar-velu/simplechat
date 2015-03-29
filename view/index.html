@@ -30,7 +30,16 @@
   // on connection to server, ask for user's name with an anonymous callback
   socket.on('connect', function(){
     // call the server-side function 'adduser' and send one parameter (value of prompt)
-    socket.emit('adduser', prompt("What's your name?"));
+      var name = prompt("What's your name?");
+    socket.emit('adduser', name);
+      $.ajax({
+  method: "GET",
+  url: "/users",
+  data: { name: name}
+})
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });
   });
 
   // listener, whenever the server emits 'updatechat', this updates the chat body
