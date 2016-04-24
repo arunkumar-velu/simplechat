@@ -25,7 +25,7 @@ app.post('/webhook/', function (req, res) {
     sender = event.sender.id;
     if (event.message && event.message.text) {
       text = event.message.text;
-      io.sockets.emit('updatechat', 'FB', text);
+      io.sockets.emit('updatechat', 'FB', event);
       // Handle a text message from this sender
     }
   }

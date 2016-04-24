@@ -27,6 +27,8 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
   var socket = io();
+  var senderId = null;
+  var receiverId = null;
   // on connection to server, ask for user's name with an anonymous callback
   socket.on('connect', function(){
     // call the server-side function 'adduser' and send one parameter (value of prompt)
@@ -44,7 +46,11 @@
 
   // listener, whenever the server emits 'updatechat', this updates the chat body
   socket.on('updatechat', function (username, data) {
-    $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+    var msg = data.message.text;
+    senderId = data.sender.id;
+    receiverId = data.recipient.id;
+    console.log('sender', senderId, 'receiverId', receiverId);
+    $('#conversation').append('<b>'+username + ':</b> ' + msg + '<br>');
   });
 
   // listener, whenever the server emits 'updateusers', this updates the username list
