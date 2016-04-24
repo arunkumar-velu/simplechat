@@ -68,6 +68,6 @@ io.sockets.on('connection', function (socket) {
 	});
 });
 
-app.listen(app.get('port'), function () {
-  console.log('Example app listening on port 8000!');
+http.listen(app.get('port'), function(){
+  console.log('listening on *:5000');
 });
