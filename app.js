@@ -7,6 +7,14 @@ app.get('/home', function(req, res){
    res.sendFile(__dirname + '/view/index.html');
 });
 
+app.get('/webhook/', function (req, res) {
+  if (req.query['hub.verify_token'] === 'arun_simple_chat') {
+    res.send(req.query['hub.challenge']);
+  }
+  res.send('Error, wrong validation token');
+});
+
+
 // usernames which are currently connected to the chat
 var usernames = {};
 
