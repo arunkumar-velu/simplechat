@@ -69,8 +69,18 @@
     $('#datasend').click( function() {
       var message = $('#data').val();
       $('#data').val('');
+      var postData = {"recipient":{"id":1008780335875754}, "message":{"text":message}}
       // tell server to execute 'sendchat' and send along one parameter
-      socket.emit('sendchat', message);
+      $.ajax({
+        method: "POST",
+        url: "https://graph.facebook.com/v2.6/me/messages?access_token=CAAGmbzqKQVQBAFKr2ktc9O750rKIc1ZBF2UvXhHt5mjEujQZCiFMNTnFxDhRbyioBZCqBmWyKZA9fC1obSfvZA9tqER2tcft02p9YUZAjziV7rbZC1A2kt6vFjjylmvHqM6sG9agyvoxW2ZCBMhJZBpbOSK98jt10A9LlkZA3hHAZC7c8tcy8HqZAldzVAYRnIL54hkZD",
+        data: postData,
+        contentType: 'application/json'
+      })
+        .done(function( msg ) {
+          $('#conversation').append('<b> Self :</b> ' + message + '<br>');
+        });
+      //socket.emit('sendchat', message);
     });
 
     // when the client hits ENTER on their keyboard
