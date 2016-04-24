@@ -46,7 +46,7 @@
 
   // listener, whenever the server emits 'updatechat', this updates the chat body
   socket.on('updatechat', function (username, data) {
-    if (event.message && event.message.text) {
+    if (data.message && data.message.text) {
       var msg = data.message.text;
       senderId = data.sender.id;
       receiverId = data.recipient.id;
