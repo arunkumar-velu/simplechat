@@ -1,6 +1,10 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set('port', (process.env.PORT || 5000));
 app.get('/home', function(req, res){
@@ -64,6 +68,6 @@ io.sockets.on('connection', function (socket) {
 	});
 });
 
-http.listen(app.get('port'), function(){
-  console.log('listening on *:5000');
+app.listen(app.get('port'), function () {
+  console.log('Example app listening on port 8000!');
 });

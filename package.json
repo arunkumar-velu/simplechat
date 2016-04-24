@@ -16,7 +16,8 @@
   },
     "dependencies": {
     "express": "^4.10.2",
-    "socket.io": "^1.2.1"
+    "socket.io": "^1.2.1",
+    "body-parser": "~1.15.0"
   },
   "author": "Arun",
   "license": "MIT"
